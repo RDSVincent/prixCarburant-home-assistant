@@ -28,7 +28,7 @@ ATTR_LAST_UPDATE = "Last update"
 CONF_MAX_KM = 'maxDistance'
 CONF_STATION_ID = 'stationID'
 
-SCAN_INTERVAL = timedelta(seconds=3600)
+SCAN_INTERVAL = timedelta(seconds=1000)
 
 
 
