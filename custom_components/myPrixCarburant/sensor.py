@@ -60,6 +60,8 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         version = ''
         xmlData = ""
         stations = {}
+        stationsXML = ""
+        lastUpdate = ""
         homeAssistantLocation = [{'lat': 50, 'lng': 3}]
         maxKM = 0
         _XML_SP95_TAG = 'SP95'
@@ -83,7 +85,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         def distance(self, lon1, lat1, lon2, lat2):
             return super().distance(lon1, lat1, lon2, lat2)
         def removeFile(self, file):
-            super().removeFile()
+            super().removeFile(file)
         def reloadIfNecessary(self):
             return super().reloadIfNecessary()
         def extractSpecificStation(self, listToExtract):
