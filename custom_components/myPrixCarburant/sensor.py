@@ -77,7 +77,25 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         def unzipFile(self, source, dest):
             super().unzipFile(source, dest)
         def extractPrice(self, priceElement, type):
-            return super().extractPrice(priceElement, type)
+            valeur = 0
+            maj= ""
+            try:
+                xpath = ".//prix[@nom='" + type + "']"
+                gazoilChild = priceElement.findall(xpath)
+                valeur = gazoilChild[0].get("valeur")
+                maj = gazoilChild[0].get("maj")
+            except BaseException:
+                pass
+            if valeur == 0:
+                valeur = None
+            else:
+                valeur = float(valeur)
+            
+            price = {
+                'valeur': str(valeur),
+                'maj': str(maj)
+            }
+            return price
         def loadStation(self, fileName):
             return super().loadStation(fileName)
         def isNear(self, maxKM, center_point, test_point):
