@@ -93,10 +93,10 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
                  str(len(stations)) + " stations found")
     client.clean()
     for station in stations:
-        add_devices([PrixCarburant(stations.get(station), client,"mdi:currency-eur")])
+        add_devices([MyPrixCarburant_(stations.get(station), client,"mdi:currency-eur")])
 
 
-class PrixCarburant(Entity):
+class MyPrixCarburant_(Entity):
     """Representation of a Sensor."""
 
     def __init__(self, station, client, icon):
@@ -107,13 +107,13 @@ class PrixCarburant(Entity):
         self._icon = icon        
         self._state = self.station.gazoil['valeur']
         self.lastUpdate=self.client.lastUpdate
-        self._unique_id = "PrixCarburant_" + self.station.id
+        self._unique_id = "MyPrixCarburant_" + self.station.id
 
 
     @property
     def name(self):
         """Return the name of the sensor."""
-        return 'PrixCarburant_' + self.station.id
+        return 'MyPrixCarburant_' + self.station.id
 
     @property
     def state(self):
