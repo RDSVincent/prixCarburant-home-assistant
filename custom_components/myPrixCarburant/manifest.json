@@ -2,7 +2,7 @@
 {
   "domain": "myPrixCarburant",
   "name": "myPrixCarburant",
-  "version": "1.1",
+  "version": "1.2",
   "documentation": "https://github.com/RDSVincent/prixCarburant-home-assistant/blob/master/README.md",
   "issue_tracker": "https://github.com/RDSVincent/prixCarburant-home-assistant/issues",
   "dependencies": [],
