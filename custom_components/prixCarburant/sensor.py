@@ -56,7 +56,24 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         'lng': str(longitude)
     }]
 
-    client = PrixCarburantClient(homeLocation, maxDistance)
+    class MyPrixCarburantClient(PrixCarburantClient):
+        def load(self):
+            aDaybefore = datetime.today() - timedelta(days=1)
+            try:
+                self.downloadFile(
+                     "https://static.data.gouv.fr/resources/prix-des-carburants-en-france/20181117-111538/active-stations.csv",
+                     "station.csv")
+                self.stations = self.loadStation('station.csv')
+                self.downloadFile("https://donnees.roulez-eco.fr/opendata/instantane",
+                              "PrixCarburants_instantane.zip")
+                self.unzipFile("PrixCarburants_instantane.zip", './PrixCarburantsData')
+                self.xmlData = "./PrixCarburantsData/PrixCarburants_quotidien_" + \
+                     aDaybefore.strftime("%Y%m%d") + ".xml"
+                self.stationsXML = self.decodeXML(self.xmlData)
+                self.lastUpdate = datetime.today().date()
+            except:
+                logging.warning("Failed to download new data, will be retry ")
+    client = MyPrixCarburantClient(homeLocation, maxDistance)
     client.load()
 
     if not listToExtract:
