@@ -1,5 +1,5 @@
 {
-  "name": "prixCarburant",
+  "name": "myPrixCarburant",
   "country": "FR",
   "domains": ["sensor"],
   "render_readme": true,
