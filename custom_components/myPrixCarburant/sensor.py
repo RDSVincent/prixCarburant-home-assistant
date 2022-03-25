@@ -57,6 +57,34 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     }]
 
     class MyPrixCarburantClient(PrixCarburantClient):
+        def __init__(self, home_assistant_location, maxKM):
+            super().__init__(home_assistant_location, maxKM)
+        def downloadFile(self, url, file):
+            super().downloadFile(file)
+        def unzipFile(self, source, dest):
+            super().unzipFile(dest)
+        def extractPrice(self, priceElement, type):
+            return super().extractPrice(priceElement, type)
+        def loadStation(self, fileName):
+            return super().loadStation(fileName)
+        def isNear(self, maxKM, center_point, test_point):
+            return super().isNear(maxKM, center_point, test_point)
+        def distance(self, lon1, lat1, lon2, lat2):
+            return super().distance(lon1, lat1, lon2, lat2)
+        def removeFile(self, file):
+            super().removeFile()
+        def reloadIfNecessary(self):
+            return super().reloadIfNecessary()
+        def extractSpecificStation(self, listToExtract):
+            return super().extractSpecificStation(listToExtract)
+        def extractAndConstructStation(self, elementxml):
+            return super().extractAndConstructStation(elementxml)
+        def foundNearestStation(self):
+            return super().foundNearestStation()
+        def clean(self):
+            super().clean()
+        def decodeXML(self, file):
+            return super().decodeXML(file)
         def load(self):
             aDaybefore = datetime.today() - timedelta(days=1)
             try:
