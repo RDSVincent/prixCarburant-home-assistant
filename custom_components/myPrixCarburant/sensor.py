@@ -127,7 +127,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
                 self.unzipFile("PrixCarburants_instantane.zip", './PrixCarburantsData')
                 self.xmlData = "./PrixCarburantsData/PrixCarburants_instantane.xml"
                 self.stationsXML = self.decodeXML(self.xmlData)
-                self.lastUpdate = datetime.today().date()
+                self.lastUpdate = datetime.now()
             except:
                 logging.warning("Failed to download new data, will be retry ")
     client = MyPrixCarburantClient(homeLocation, maxDistance)
@@ -212,7 +212,7 @@ class MyPrixCarburant_(Entity):
             ATTR_GPL_LAST_UPDATE: self.station.gpl['maj'],
             ATTR_ADDRESS: self.station.adress,
             ATTR_NAME: self.station.name,
-            ATTR_LAST_UPDATE: self.client.lastUpdate.strftime('%Y-%m-%d')
+            ATTR_LAST_UPDATE: self.client.lastUpdate.strftime('%Y-%m-%d %H:%M')
         }
         return attrs
 
