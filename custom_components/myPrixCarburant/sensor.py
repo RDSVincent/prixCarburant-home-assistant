@@ -57,6 +57,17 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     }]
 
     class MyPrixCarburantClient(PrixCarburantClient):
+        version = ''
+        xmlData = ""
+        stations = {}
+        homeAssistantLocation = [{'lat': 50, 'lng': 3}]
+        maxKM = 0
+        _XML_SP95_TAG = 'SP95'
+        _XML_SP98_TAG = 'SP98'
+        _XML_E10_TAG = 'E10'
+        _XML_GAZOLE_TAG = 'Gazole'
+        _XML_E85_TAG = 'E85'
+        _XML_GPL_TAG = 'GPLc'
         def __init__(self, home_assistant_location, maxKM):
             super().__init__(home_assistant_location, maxKM)
         def downloadFile(self, url, file):
